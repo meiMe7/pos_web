@@ -2,7 +2,7 @@
  * Created by csc on 15-3-30.
  */
 
-    var cartList = sessionStorage.tempArray;
+    var cartList = sessionStorage.oneProduct;
     cartList = JSON.parse(cartList);
     var countInCart = [];
     for (var i in cartList) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
             type: item.type,
             name: item.name,
             price: item.price,
-            unit: item.uit,
+            unit: item.unit,
             count: item.count,
             i: k,
             countPrice: item.countPrice+"元"
@@ -63,18 +63,20 @@ $(document).ready(function () {
                     var objI = countInCart[l];
                     objI.count = 1;
                     cartList.push(objI);
-                    sessionStorage.tempArray = JSON.stringify(cartList);
+                    sessionStorage.oneProduct = JSON.stringify(cartList);
                     $("#number").html(cartList.length);
                 }
                 if (idArray[1] == l && idArray[2] == "lower" && parseInt($("#count-" + l).text()) >0) {
                     $("#count-" + l).html(parseInt($("#count-" + l).text()) - 1);
                     countInCart[l].count--;
                     cartList.splice(l, 1);
-                    sessionStorage.tempArray = JSON.stringify(cartList);
+                    sessionStorage.oneProduct = JSON.stringify(cartList);
                     $("#number").html(cartList.length);
                 }
             }
         }
     );
-
+    $("#productList").click(function() {
+        sessionStorage.clear();
+    });
 });
